@@ -9112,4 +9112,160 @@ Caused by: org.postgresql.util.PSQLException: ERROR: schema "sistema" does not e
 ""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
     
     drop sequence if exists sistema.hibernate_sequence
+""24-09-2021 [restartedMain] DEBUG o.s.b.w.s.ServletContextInitializerBeans - Mapping filters: springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+""24-09-2021 [restartedMain] DEBUG o.s.b.w.s.ServletContextInitializerBeans - Mapping servlets: dispatcherServlet urls=[/]
+""24-09-2021 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""24-09-2021 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""24-09-2021 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""24-09-2021 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       drop constraint if exists FKoedpbus6vxieo6358sqi3beex
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "student_roles" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       drop constraint if exists FK5wsgmwcdh1mu2aakbatae9ouh
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "student_roles" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.role cascade
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "role" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.student cascade
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "student" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.student_roles cascade
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "student_roles" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    drop sequence if exists sistema.hibernate_sequence
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+""24-09-2021 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - sequence "hibernate_sequence" does not exist, skipping
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - create sequence sistema.hibernate_sequence start 1 increment 1
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    create table sistema.role (
+       id int8 not null,
+        role varchar(255),
+        primary key (id)
+    )
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    create table sistema.student (
+       id int8 not null,
+        email varchar(255),
+        first_name varchar(255),
+        last_name varchar(255),
+        password varchar(255),
+        primary key (id)
+    )
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    create table sistema.student_roles (
+       student_id int8 not null,
+        roles_id int8 not null
+    )
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       add constraint UK_4o5dxiayltn8dablkf1v0xo4t unique (roles_id)
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       add constraint FKoedpbus6vxieo6358sqi3beex 
+       foreign key (roles_id) 
+       references sistema.role
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       add constraint FK5wsgmwcdh1mu2aakbatae9ouh 
+       foreign key (student_id) 
+       references sistema.student
+""24-09-2021 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""24-09-2021 [restartedMain] TRACE o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	c.h.d.c.HomeController:
+	{GET [/]}: getIndexPage(Model)
+""24-09-2021 [restartedMain] TRACE o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	c.h.d.c.StudentProfileController:
+	{GET [/student/profile]}: getStudentProfile(Model)
+""24-09-2021 [restartedMain] TRACE o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	s.d.s.w.ApiResourceController:
+	{ [/swagger-resources/configuration/ui]}: uiConfiguration()
+	{ [/swagger-resources]}: swaggerResources()
+	{ [/swagger-resources/configuration/security]}: securityConfiguration()
+""24-09-2021 [restartedMain] TRACE o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+""24-09-2021 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 7 mappings in 'requestMappingHandlerMapping'
+""24-09-2021 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+""24-09-2021 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+""24-09-2021 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+""24-09-2021 [restartedMain] DEBUG o.s.w.s.v.f.FreeMarkerConfigurer - File system access not preferred: using SpringTemplateLoader
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        nextval ('sistema.hibernate_sequence')
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        nextval ('sistema.hibernate_sequence')
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        sistema.student
+        (email, first_name, last_name, password, id) 
+    values
+        (?, ?, ?, ?, ?)
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [mp.rebello.martins@gmail.com]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [2] as [VARCHAR] - [Marcelo]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [3] as [VARCHAR] - [Martins]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [4] as [VARCHAR] - [$2a$10$S3KvEkqA4JRndJzCsiUeeuR2pKwaiPUWXfaAHBc4m8QhxPhvgR.9.]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [5] as [BIGINT] - [1]
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        sistema.role
+        (role, id) 
+    values
+        (?, ?)
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [VARCHAR] - [STUDENT]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [2] as [BIGINT] - [2]
+""24-09-2021 [restartedMain] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        sistema.student_roles
+        (student_id, roles_id) 
+    values
+        (?, ?)
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [1] as [BIGINT] - [1]
+""24-09-2021 [restartedMain] TRACE o.h.type.descriptor.sql.BasicBinder - binding parameter [2] as [BIGINT] - [2]
+""24-09-2021 [SpringApplicationShutdownHook] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       drop constraint if exists FKoedpbus6vxieo6358sqi3beex
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    alter table if exists sistema.student_roles 
+       drop constraint if exists FK5wsgmwcdh1mu2aakbatae9ouh
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.role cascade
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.student cascade
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    drop table if exists sistema.student_roles cascade
+""24-09-2021 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    
+    drop sequence if exists sistema.hibernate_sequence
 "
